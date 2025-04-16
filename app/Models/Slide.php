@@ -9,5 +9,7 @@ class Slide extends Model
 {
     use HasFactory;
 
-    protected $table = 'slides'; // Nếu bảng trong database có tên khác, hãy đổi lại
+    protected $table = 'slides'; // Bảng trong database
+
+    protected $fillable = ['link', 'image']; // Các trường cho phép gán hàng loạt
 }

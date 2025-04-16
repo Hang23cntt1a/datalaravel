@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product; // Import model Product
+use App\Models\Slide; // Import model Slide
+use App\Models\Category;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Lấy danh sách tất cả sản phẩm từ database
-        $products = Product::all();
+        // Lấy danh sách tất cả slide từ database
+        $slides = Slide::all();
+        $categories = Category::all(); // Lấy danh sách loại sản phẩm
 
         // Trả dữ liệu về view index.blade.php
-        return view('index', compact('products'));
+        return view('index', compact('slides', 'categories'));
     }
 }
+

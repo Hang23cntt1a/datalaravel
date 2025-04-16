@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <h4>Đặt hàng</h4>
+                        <h4 style="font-family: time new roman">Đặt hàng</h4>
                         <div class="space20">&nbsp;</div>
 
                         <div class="form-block">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="your-order">
-                            <div class="your-order-head"><h5>Đơn hàng của bạn</h5></div>
+                            <div class="your-order-head"><h5 style="font-family: time new roman">Đơn hàng của bạn</h5></div>
                             <div class="your-order-body" style="padding: 0px 10px">
                                 <div class="your-order-item">
                                     <div>
@@ -83,14 +83,14 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="your-order-item">
-                                    <div class="pull-left"><p class="your-order-f18">Tổng tiền:</p></div>
-                                    <div class="pull-right"><h5 class="color-black">{{ number_format($cart->totalPrice) }}</h5></div>
+                                    <div class="pull-left" ><p class="your-order-f18" style="font-family: time new roman">Tổng tiền:</p></div>
+                                    <div class="pull-right"><h5 class="color-black" style="font-family: time new roman">{{ number_format($cart->totalPrice) }}</h5></div>
                                     <div class="clearfix"></div>
                                 </div>
                                 @endif
                             </div>
 
-                            <div class="your-order-head"><h5>Hình thức thanh toán</h5></div>
+                            <div class="your-order-head"><h5 style="font-family: time new roman">Hình thức thanh toán</h5></div>
                            
                             <div class="your-order-body">
                                 <ul class="payment_methods methods">

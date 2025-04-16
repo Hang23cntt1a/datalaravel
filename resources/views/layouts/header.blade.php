@@ -8,14 +8,21 @@
                 </ul>
             </div>
             <div class="pull-right auto-width-right">
-                <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div> <!-- .container -->
+					<ul class="top-details menu-beta l-inline">
+						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
+						@if(Auth::check())
+                            <li><a href="#"><i class="fa fa-user"></i>Chào bạn {{ Auth::user()->username}}</a></li>
+                            <li><a href="{{ route('getlogout') }} "><i class="fa fa-user"></i>Đăng xuất</a></li>
+						@else
+               			<form action="{{ route('admin.postLogin') }}" method="post" class="beta-form-checkout">
+						@csrf
+                        <li><a href="{{ route('getsignin') }}">Đăng kí</a></li>
+                        <li><a href="{{ route('getlogin') }}">Đăng nhập</a></li>
+						@endif
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div> <!-- .container -->
     </div> <!-- .header-top -->
     
     <div class="header-body">
@@ -26,10 +33,16 @@
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
-                    <form role="search" method="get" id="searchform" action="/">
-                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
-                        <button class="fa fa-search" type="submit" id="searchsubmit"></button>
-                    </form>
+
+				<form role="search" method="GET" id="searchform" action="{{ route('products.search') }}">
+					<input type="text" name="keyword" id="s" placeholder="Nhập từ khóa..." required />
+					<button type="submit" id="searchsubmit">
+						<i class="fa fa-search"></i> <!-- Hiển thị icon tìm kiếm -->
+					</button>
+				</form>
+
+
+
                 </div>
 
                 <div class="beta-comp">
@@ -72,6 +85,9 @@
 								<a href="{{ route('banhang.getdathang') }}" class="btn-checkout">
 									Đặt hàng <i class="fa fa-chevron-right"></i>
 								</a>
+								<a href="{{ route('cart') }}" class="btn-checkout">
+									Xem giỏ hàng  <i class="fa fa-chevron-right"></i>
+								</a>
 							</div>
 						</div>
 						@endif
@@ -88,16 +104,28 @@
 						<nav class="main-menu">
 							<ul class="l-inline ov">
 								<li><a href="{{ route('banhang.index') }}" style="font-family: Time new roman; font-size: 20px;">Trang chủ</a></li>
-								<li><a href="#" style="font-family: Time new roman;font-size: 20px;">Sản phẩm</a>
-									<ul class="sub-menu">
-										<li><a href="product_type.html" style="font-family: Time new roman; font-size: 18px;">Sản phẩm 1</a></li>
-										<li><a href="product_type.html" style="font-family: Time new roman; font-size: 18px;">Sản phẩm 2</a></li>
-										<li><a href="product_type.html" style="font-family: Time new roman; font-size: 18px;">Sản phẩm 4</a></li>
-									</ul>
-								</li>
+								<li>
+    <a href="#" style="font-family: Time new roman; font-size: 20px;">Sản phẩm</a>
+    <ul class="sub-menu">
+    @foreach($categories as $category)
+        <li>
+            <a href="{{ route('category.show', $category->id) }}" style="font-family: Time new roman; font-size: 18px;">
+                {{ $category->name }} {{-- Hoặc ten_loai nếu cột tên là vậy --}}
+            </a>
+        </li>
+    @endforeach
+</ul>
+
+</li>
+
+
 								<li><a href="about.html" style="font-family: Time new roman; font-size: 20px;">Giới thiệu</a></li>
-								<li><a href="contacts.html" style="font-family: Time new roman; font-size: 20px;">Liên hệ</a></li>
-							</ul>
+								<li>
+									<a href="{{ url('/lien-he') }}" style="font-family: 'Times New Roman'; font-size: 20px;">
+										Liên hệ
+									</a>
+								</li>
+
 							<div class="clearfix"></div>
 						</nav>
 					</div> <!-- .container -->

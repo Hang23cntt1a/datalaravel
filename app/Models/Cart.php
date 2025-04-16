@@ -75,4 +75,41 @@ class Cart extends Model
         $this->totalPrice -= $this->items[$id]['totalPrice'];
         unset($this->items[$id]);
     }
+    /// TÍNH IỀN
+    public function updateQuantity($id, $quantity)
+{
+    if (!isset($this->items[$id])) {
+        return;
+    }
+
+    $item = $this->items[$id];
+    $unitPrice = $item['item']->promotion_price > 0 ? $item['item']->promotion_price : $item['item']->unit_price;
+
+    // Trừ tổng cũ
+    $this->totalQty -= $item['qty'];
+    $this->totalPrice -= $item['totalPrice'];
+
+    // Cập nhật lại số lượng và total của dòng sản phẩm
+    $item['qty'] = $quantity;
+    $item['price'] = $unitPrice; // giữ đúng ý nghĩa là giá đơn vị
+    $item['totalPrice'] = $unitPrice * $quantity;
+
+    // Gán lại vào items
+    $this->items[$id] = $item;
+
+    // Tính lại tổng
+    $this->totalQty += $quantity;
+    $this->totalPrice += $item['totalPrice'];
+}
+
+
+public function remove($id)
+{
+    if (isset($this->items[$id])) {
+        $this->totalQty -= $this->items[$id]['qty'];
+        $this->totalPrice -= $this->items[$id]['price'];
+        unset($this->items[$id]);
+    }
+}
+    
 }
